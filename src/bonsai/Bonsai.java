@@ -58,11 +58,12 @@ public class Bonsai {
     }
     
     public void createUser(User user) throws Exception {
-        doHTTP("/users", "POST", serializeObject(user));
+        doHTTP("/users", "POST", serializeObject(user,"user"));
     }
     
-    private String serializeObject(Object object) throws Exception {
+    private String serializeObject(Object object, String container) throws Exception {
         String jsonString = mapper.writeValueAsString(object);
+        jsonString = container + "= " + jsonString;
         return jsonString;
     }
     
@@ -77,7 +78,7 @@ public class Bonsai {
             OutputStream os = con.getOutputStream();
             BufferedWriter writer = new BufferedWriter(
                     new OutputStreamWriter(os, "UTF-8"));
-            writer.write("user=" + data);
+            writer.write(data);
             writer.flush();
             writer.close();
             os.close();
