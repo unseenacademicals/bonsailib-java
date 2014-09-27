@@ -7,13 +7,14 @@ package bonsai;
 import com.fasterxml.jackson.databind.*;
 import java.io.*;
 import java.net.*;
+import java.util.HashMap;
 
 /**
  *
  * @author mitchell
  */
 public class Bonsai {
-    private final String BASE_URL = "http://localhost:5000/api";
+    private final String BASE_URL = "http://bonsaibadge.herokuapp.com/api";
     private final ObjectMapper mapper = new ObjectMapper();
     
     public User[] getAllUsers() throws Exception {
@@ -58,12 +59,13 @@ public class Bonsai {
     }
     
     public void createUser(User user) throws Exception {
-        doHTTP("/users", "POST", serializeObject(user,"user"));
+        HashMap<String, User> object = new HashMap<String, User>();
+        object.put("user", user);
+        doHTTP("/users", "POST", serializeObject(object));
     }
     
-    private String serializeObject(Object object, String container) throws Exception {
+    private String serializeObject(Object object) throws Exception {
         String jsonString = mapper.writeValueAsString(object);
-        jsonString = container + "= " + jsonString;
         return jsonString;
     }
     
@@ -75,13 +77,11 @@ public class Bonsai {
         
         if (data != null) {
             con.setDoOutput(true);
+            con.setRequestProperty("Content-Type", "application/json");
+            con.setRequestProperty("Content-Length", String.valueOf(data.length()));
             OutputStream os = con.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(
-                    new OutputStreamWriter(os, "UTF-8"));
-            writer.write(data);
-            writer.flush();
-            writer.close();
-            os.close();
+            os.write(data.getBytes());
+            os.flush();
         }
 
         int responseCode = con.getResponseCode();
