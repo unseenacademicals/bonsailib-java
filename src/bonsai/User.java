@@ -12,9 +12,9 @@ import com.fasterxml.jackson.annotation.*;
  * @author mitchell
  */
 public class User {
-    @JsonIgnore private String created_at;
-    @JsonIgnore private String updated_at;
-    @JsonIgnore private String id;
+    private String created_at;
+    private String updated_at;
+    private String id;
     private String acclaim_id;
     private double latitude;
     private double longitude;
@@ -23,27 +23,27 @@ public class User {
         return new Location(latitude, longitude);
     }
     
-    public String getCreated_at() {
+    @JsonIgnore public String getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(String created_at) {
+    @JsonProperty public void setCreated_at(String created_at) {
         this.created_at = created_at;
     }
 
-    public String getUpdated_at() {
+    @JsonIgnore public String getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdated_at(String updated_at) {
+    @JsonProperty public void setUpdated_at(String updated_at) {
         this.updated_at = updated_at;
     }
 
-    public String getId() {
+    @JsonIgnore public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    @JsonProperty public void setId(String id) {
         this.id = id;
     }
 

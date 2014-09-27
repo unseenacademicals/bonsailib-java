@@ -6,6 +6,7 @@
 package bonsai;
 
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -25,21 +26,8 @@ public class BonsaiTester {
         
         try {
             
-            // getting data
-            User[] users = client.getAllUsers();
-            System.out.println(users[0].getAcclaim_id());
-            User user = client.getUser(1);
-            System.out.println(user.getAcclaim_id());
-            Employer emp = client.getEmployer(1);
-            User[] usersNearby = client.getNearbyUsers(emp.getLocationObject());
-            System.out.println(usersNearby[0].getAcclaim_id());
-            
-            // creating records
-            User newUser = new User();
-            newUser.setAcclaim_id("dummy-id");
-            newUser.setLatitude(40.0000);
-            newUser.setLongitude(-90.0000);
-            client.createUser(newUser);
+            User kyle = client.getUserByAcclaimID("675c8db1-24ba-4055-9b50-e7f2c9d4f062");
+            System.out.println("Fetched kyle");
             
             
             

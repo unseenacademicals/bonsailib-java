@@ -53,6 +53,11 @@ public class Bonsai {
         return mapper.readValue(response, User[].class);
     }
     
+    public User getUserByAcclaimID(String acclaim_id) throws Exception {
+        String response = doHTTP("/users/by-acclaim/" + acclaim_id, "GET", null);
+        return mapper.readValue(response, User.class);
+    }
+    
     public Employer[] getNearbyEmployers(Location location) throws Exception {
         String response = doHTTP("/employers/near/" + location.latitude + "/" + location.longitude, "GET", null);
         return mapper.readValue(response, Employer[].class);
@@ -62,6 +67,12 @@ public class Bonsai {
         HashMap<String, User> object = new HashMap<String, User>();
         object.put("user", user);
         doHTTP("/users", "POST", serializeObject(object));
+    }
+    
+    public void updateUser(User user) throws Exception {
+        HashMap<String, User> object = new HashMap<String, User>();
+        object.put("user", user);
+        doHTTP("/users/"+user.getId(), "PUT", serializeObject(object));
     }
     
     private String serializeObject(Object object) throws Exception {
