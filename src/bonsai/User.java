@@ -5,19 +5,21 @@
  */
 package bonsai;
 
+import com.fasterxml.jackson.annotation.*;
+
 /**
  *
  * @author mitchell
  */
 public class User {
-    private String created_at;
-    private String updated_at;
-    private String id;
+    @JsonIgnore private String created_at;
+    @JsonIgnore private String updated_at;
+    @JsonIgnore private String id;
     private String acclaim_id;
     private double latitude;
     private double longitude;
 
-    public Location getLocationObject () {
+    @JsonIgnore public Location getLocationObject () {
         return new Location(latitude, longitude);
     }
     
