@@ -14,7 +14,7 @@ import java.util.HashMap;
  * @author mitchell
  */
 public class Bonsai {
-    private final String BASE_URL = "http://localhost:5000/api";
+    private final String BASE_URL = "http://bonsaibadge.herokuapp.com/api";
     private final ObjectMapper mapper = new ObjectMapper();
     
     public User[] getAllUsers() throws Exception {
