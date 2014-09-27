@@ -17,7 +17,7 @@ public class AcclaimTester {
         try {
             // replace this with the user's username and password
             Acclaim client = new Acclaim(ORG_AUTH_TOKEN,"");
-            System.out.println(client.doHTTGetRequest("/users/self/badges"));
+            System.out.println(client.doHTTPGetRequest("/organizations/"+ORG_ID+"/badge_templates"));
         }
         catch (Exception e) {
             System.out.println(e.getMessage());

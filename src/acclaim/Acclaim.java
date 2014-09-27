@@ -25,7 +25,7 @@ public class Acclaim {
         authString = "Basic " + base64;
     }
     
-    public String doHTTGetRequest(String url) throws Exception {
+    public String doHTTPGetRequest(String url) throws Exception {
         URL obj = new URL(BASE_URL + url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
